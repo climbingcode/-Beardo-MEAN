@@ -11,8 +11,6 @@ app.service('apiHandler', function($http, $upload) {
 			});
 		},
 
-
-
 		upload: function(data, file) {
 			$upload.upload({
 				url: 'api/beards', 
