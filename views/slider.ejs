@@ -1,0 +1,57 @@
+<section class="slider-container" ng-controller="sliderCtrl">
+	<div ng-repeat="beard in beards">
+		<div class="loading section" ng-show="!slidesLoaded">
+			<img class="loading-image" ng-src="images/loading.gif">
+			<img class="loading-wheel" ng-src="images/loading-wheel.gif">
+		</div>
+		<div ng-show="slidesLoaded" >
+			<div class="viewport" 
+				ng-show="isCurrentSlideIndex($index)" >
+				<h2 ng-show="isCurrentSlideIndex($index)">{{ beard.index }}</h2>
+				<h2 class="votes" ng-if="beard.average">Ranking : {{ beard.average }}%</h2>
+				<img 	class="slide" 
+							
+							ng-src="{{beard.picture}}">
+				<h2 ng-if="beard.beardname" ng-show="isCurrentSlideIndex($index)" >{{beard.beardname | capitalize:true}}</h2>
+			</div>
+
+			<a class="voting" ng-click="downVote()">
+				<div class="vote-down"></div>
+			</a>
+	    <a class="voting" ng-click="upVote()">
+	    	<div class="vote-up"></div>
+	    </a>
+	    <a class="arrows" ng-click="nextSlide()">
+	    	<div class="next-slide"></div>
+	    </a>
+	    <a class="arrows" ng-click="prevSlide()">
+	    	<div class="prev-slide"></div>
+	    </a>
+
+
+			<nav id="slider nav">
+				<div class="dots-wrapper">
+					<span class="dot">
+					  <a 	ng-class="{ 'active': isCurrentSlideIndex($index) }"
+	              ng-click="setCurrentSlideIndex($index);">{{beard.beardname}}</a>
+	        </span>
+				</div>
+			</nav>
+		</div>
+
+		<div id="comment-wrapper" ng-show="isCurrentSlideIndex($index)">
+			<div 	class="comment" 
+						ng-repeat="comment in beard.comments">
+				<h1>{{comment.comment | capitalize:true}}</h1>
+				<h4>{{ comment.created | date:'d MMMM yyyy' : 'UTC' }}</h4>
+			</div>
+		</div>
+	</div>
+
+	<form ng-submit="submitComment(comment)">
+		<input type="text" ng-model="comment.comment"></input>
+		<button name="submit">Submit</button>
+	</form>
+
+</section>
+

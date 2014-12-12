@@ -1,0 +1,38 @@
+<section class="form-wrapper" ng-controller="formCtrl">
+	<form class="form-group" ng-submit="submitForm(form)">
+		
+		<input 	class="form-control" 
+						type="input" 
+						ng-model="form.beardname" 
+						placeholder="add a cool name!">
+		</input>
+
+		<div class="drop-container" >
+			
+		</div>
+
+		<img ng-image-drag ng-src="images/beard-1.png">
+
+		<!-- uploader -->
+		<div class="fileinput fileinput-new" data-provides="fileinput">
+  		<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 400px; max-height: 400px;">	
+  		</div>
+  		<div>
+    		<span class="btn btn-default btn-file">
+    			<span class="fileinput-new">Select image</span>
+    			<span class="fileinput-exists">Change</span>
+    			<input 	type="file" 
+									name="file" 
+									file-model="photo"/>
+					</input>
+				</span>
+    		<a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+  		</div>
+		</div>
+		<button class="btn btn-default" 
+						type="submit">
+						Submit
+		</button>
+	</form>
+
+</section>

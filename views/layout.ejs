@@ -1,0 +1,48 @@
+<!doctype html>
+
+<html lang="en" ng-app="app">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>My App</title>
+		<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+	</head>
+
+	<body ng-controller="mainCtrl">
+
+			
+			<%- include nav %>
+
+			<div id="content" class="col-lg-12">
+					<div class="row">
+						<%- body %>
+					</div>
+			</div>
+
+<!-- 	plugins -->
+			<script src="jquery/dist/jquery.min.js"></script>
+			<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+			<script src="jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+
+<!-- 	angular required files --> 
+			<script src="angular/angular.min.js"></script>
+			<script src="ng-file-upload-shim/angular-file-upload-shim.min.js"></script>
+			<script src="ng-file-upload/angular-file-upload.min.js"></script>
+			<script src="angular-animate/angular-animate.min.js"></script>
+			<script src="javascript/angular/app.js"></script>
+			<script src="javascript/angular/directives.js"></script>
+			<script src="javascript/angular/services.js"></script>
+			<script src="javascript/angular/factories.js"></script>
+			<script src="javascript/angular/animations.js"></script>
+			
+
+<!-- 	angular	controllers -->
+			<script src="javascript/angular/controllers/main_ctrl.js"></script>
+			<script src="javascript/angular/controllers/slider_ctrl.js"></script>
+			<script src="javascript/angular/controllers/form_ctrl.js"></script>
+		
+			
+	</body>
+
+<html>
