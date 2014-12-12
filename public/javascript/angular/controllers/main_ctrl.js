@@ -1,7 +1,5 @@
 app.controller("mainCtrl", function($scope, apiHandler, dataFactory) {
 
-	$scope.appName = "test app";
-
 	//data
 	$scope.beards = [];
 	$scope.ratings = [];

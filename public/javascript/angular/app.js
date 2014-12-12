@@ -1,1 +1,1 @@
-var app = angular.module("app", ['angularFileUpload', 'ngAnimate']);
+var app = angular.module("app", ['angularFileUpload', 'ngAnimate', 'ngRoute']);
