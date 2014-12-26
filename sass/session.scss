@@ -1,0 +1,36 @@
+#session-wrapper {
+	.error {
+ 		display: none;
+	}
+	.error.active {
+		display: block;
+		width: 293px;
+		height: 45px;
+		padding: 13px;
+		letter-spacing: 2px;
+		position: absolute;
+		background-color: #836953;
+		font-family: "woodcut";
+		color: white;
+	}
+	@include scale;
+	h1 {
+		text-align: center;
+	}
+	input {
+		width: 50%;
+		margin-top: 2.5%;
+		@include center-block;
+	}
+	button {
+		width: 50%;
+		margin-top: 2.5%;
+		@include center-block;
+	}
+	.sign-in {
+		width: 100%;
+	}
+	.sign-up {
+		width: 100%;
+	}
+}

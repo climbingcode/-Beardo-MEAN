@@ -1,7 +1,6 @@
 app.service('apiHandler', function($http, $upload) {
 	return {
-		index: function(route) 
-		{
+		index: function(route) {
 			return $http.get("api/" + route).
 			success(function(data, status) {
 				console.log("success : ", status)
@@ -38,8 +37,23 @@ app.service('apiHandler', function($http, $upload) {
 				console.log('api did not except');
 			});
 			callback(obj);
-			}
+		},
+
+		show: function(route, data, callback) {
+			$http.post(
+				"api/" + route,
+				JSON.stringify(data)
+
+			).success(function(data, status) {
+				console.log("success : ", data, status)
+				callback(data);
+			}).
+			error(function(status) {
+				console.log("failed : ", status)
+				callback("not found")
+			});
 		}
+	}
 });	
 
 

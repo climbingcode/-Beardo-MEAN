@@ -1,5 +1,36 @@
-.drop-container {
-	width: 200px;
-	height: 250px;
-	background: grey;
+.form-wrapper {
+	@include scale;
+	.beard-name {
+		width: 50%;
+		float: left;
+	}	
+	.fileinput-container {
+		width: 50%;
+		float: left;
+	}
+	.beard-type-container {
+		.drop-box {
+			float: right;
+			width: 49%;
+			height: 200px;
+			background: grey;
+			div {
+				position: relative;
+				background: #fff;
+				opacity: 0.5;
+				width: 50%;
+				height: 200px;
+				@include center-block;
+			}
+		}
+		span {
+			clear: both;
+		} 
+	}
+}
+
+
+
+.error.active {
+	display: block;
 }

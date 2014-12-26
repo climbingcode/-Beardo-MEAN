@@ -2,7 +2,20 @@
 	<div ng-show="showBeards">
 		<%- include slider %>
 	</div>
-	<div ng-show="showForm">
-		<%- include form %>
+	
+	<div ng-show="showForm" ng-controller="sessionCtrl">
+
+		<h2 class="welcome" ng-show="inSession">Hey, {{user.username}}</h2>
+		<button class="login" ng-show="inSession" ng-click="logOut()">Logout</button>
+
+		<div ng-show="!inSession">
+			<%- include sessions %>
+		</div>
+		
+		<div ng-show="inSession">
+			<%- include form %>
+		</div>
+
 	</div>
+
 </div>

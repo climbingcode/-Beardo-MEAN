@@ -1,23 +1,16 @@
-#main-nav {
+	#main-nav {
 	position: fixed;
 	z-index: 2;
 	top: 0;
 	width: 100%;
-	ul {
+	@include box-shadow(2, 3, 3, #000);
+	div {
 		height: 150px;
 		background-color: $beard-brown;
 		float: none; 
 		margin: 0 auto;
-		@include desktop {
-			width: 1000px;
-		}
-		@include tablet {
-			width: 100%;
-		}
-		@include phone {
-			width: 100%;
-		}
-		li {
+		@include scale;
+		span {
 			position: relative;
 			line-height: 20px;
 			@include desktop {
@@ -28,13 +21,20 @@
 			@include tablet {
 				height: 75px;
 				display: block;
+				margin-top: -21px;
 			}
 			@include phone {
-
+				height: 75px;
+				display: block;
+				margin-top: -21px;
 			}
 			h1 {
-				color: #fff;
+				color: #000;
 				text-align: center;
+				line-height: 1;
+				@include desktop {
+					margin-left: 50px;
+				}
 				img {
 					height: 150px;
 					display: inline-block;
@@ -45,18 +45,27 @@
 }
 
 #main-nav {
-	ul {
-		li.active {
+	div {
+		span.active {
 			@include transition(background-image, 0.5s, ease-in-out);
-			background-image: url("../images/beard-sil.png");
 			background-color: #000;
-			background-repeat: no-repeat;
-			background-position: 5% 5%; 
 			@include desktop {
+				background-image: url("../images/beard-sil.png");
+				background-repeat: no-repeat;
+				background-position: 5% 5%; 
 				background-size: 140px 140px;
+				width: 50.5%;
 			}
 			@include tablet {
-				background-size: 140px 140px;
+				width: 100%;
+				margin-top: -21px;
+			}
+			@include phone {
+				width: 100%;
+				margin-top: -21px;
+			}
+			h1 {
+				color: #fff;
 			}
 		}
 	}

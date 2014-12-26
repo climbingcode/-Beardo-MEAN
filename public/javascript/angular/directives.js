@@ -59,3 +59,23 @@ app.directive('ngImageDrag', ["$document", function($document) {
         }
     }
 }]);
+
+
+app.directive("ngDropBox", function($document) {
+  return {
+    restrict: "A",
+    scope: {
+      onDrop: '&'
+    },
+
+    link: function(scope, el, attrs) {
+      console.log(angular.element(el).getBoundingClientRect());
+      var id = angular.element(el).attr("id");
+      console.log(id);
+    }
+  }
+
+});
+
+
+

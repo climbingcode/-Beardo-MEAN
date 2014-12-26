@@ -1,6 +1,8 @@
 app.controller("mainCtrl", function($scope, apiHandler, dataFactory) {
 
 	//data
+	$scope.inSession = true;
+	$scope.user = null;
 	$scope.beards = [];
 	$scope.ratings = [];
 	$scope.slidesLoaded = false;

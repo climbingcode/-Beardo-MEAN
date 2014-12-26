@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 // var bcrypt = require('bcrypt');
 
-
 var BeardSchema = new Schema({
 	beardname: String,
 	beardtype: String,

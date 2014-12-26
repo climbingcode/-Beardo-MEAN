@@ -8,9 +8,11 @@ var express = require('express')
 var Rating = mongoose.model('Rating');
 var Beard = mongoose.model('Beard');
 
+var options = { skip: 0, limit: 10, count: 5 };
+
 router.route('/beards')
   .get(function(req, res) {
-  Beard.find().populate('rating').exec(function(err, data) {
+  Beard.find().exec(function(err, data) {
     if (err) {
       res.send(err);
     } else {
@@ -33,10 +35,6 @@ router.route('/beards').post([ multer({ dest: './uploads/'}), function(req, res)
       if (err) {
         console.log(beard, "failed");
         res.send(err);
-        res.json({ 
-          type: "failed",
-          saved: beard 
-        });
       } else {
         console.log(beard, "saved");
         res.json({ 

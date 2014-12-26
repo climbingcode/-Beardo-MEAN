@@ -2,8 +2,8 @@ app.controller("formCtrl", function($scope, apiHandler, dataFactory) {
 	
 	//form
 	$scope.beardtypes = [{image: "images/beard-1.png", name: "full beards"}, 
-											{image: "", name: "partial beard"}, 
-											{image: "", name: "goatie"}];
+											{image: "images/beard-1.png", name: "partial beard"}, 
+											{image: "images/beard-1.png", name: "goatie"}];
 
 	$scope.form = {};
 	

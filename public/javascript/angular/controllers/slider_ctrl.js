@@ -1,6 +1,5 @@
 app.controller("sliderCtrl", function($scope, apiHandler, dataFactory) {
 
-
 	//call function to get beards
 	$scope.getData("beards", function(data){
     dataFactory.averageVote(data, function(data) {
@@ -46,12 +45,13 @@ app.controller("sliderCtrl", function($scope, apiHandler, dataFactory) {
     $scope.prevSlide();
   }
 
-  $scope.comment = {};
-
   $scope.submitComment = function() {
     $scope.comment.beard = $scope.beards[$scope.currentIndex]._id
     apiHandler.create("comments", $scope.comment, function(obj){
-      comment = $scope.beards[$scope.currentIndex].comments;
+      console.log(obj);
+      $scope.comment = {};
+      $scope.comment_form.$setPristine();
+      $scope.beards[$scope.currentIndex].comments.push(obj);  
     });
   }
 });

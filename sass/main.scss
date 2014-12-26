@@ -3,30 +3,16 @@
 
  $beard-brown: #836953;
 
- //mixins
+//mixins
 
-@mixin transition($transition-property, $transition-time, $method) {
-  -webkit-transition: $transition-property $transition-time $method;
-  -moz-transition: $transition-property $transition-time $method;
-  -ms-transition: $transition-property $transition-time $method;
-  -o-transition: $transition-property $transition-time $method;
-  transition: $transition-property $transition-time $method;
-}
+//media
 
-@mixin center-block {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-
- /* Medium Devices, Desktops */
- $desktop-width: 992px;
- /* Small Devices, Tablets */
- $tablet-width: 768px;
- /* Extra Small Devices, Phones */ 
- $phone-width: 480px;
+/* Medium Devices, Desktops */
+$desktop-width: 992px;
+/* Small Devices, Tablets */
+$tablet-width: 768px;
+/* Extra Small Devices, Phones */ 
+$phone-width: 480px;
 
 
 @mixin desktop {
@@ -45,29 +31,87 @@
   }
 }
 
+@mixin scale($desktop-width: 1000px, $tablet-width: 100%, $phone-width: 100%) {
+  @include center-block;
+  @include desktop { 
+   
+    width: $desktop-width;  
+  }
+  @include tablet { 
+    width: $tablet-width; 
+  }
+  @include phone { 
+    width: $phone-width;
+  }
+}
+
+// fonts
+@mixin font-face($font-family, $file-path, $font-weight, $font-style) {
+  @font-face {
+    font-family: $font-family;
+      src: url('../fonts/#{$file-path}.eot');
+      src: url('../fonts/#{$file-path}.eot?#iefix') format('embedded-opentype'),
+           url('../fonts/#{$file-path}.ttf') format('truetype'),
+           url('../fonts/#{$file-path}.svg##{$font-family}') format('svg');
+    font-weight: $font-weight;
+    font-style: $font-style;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+// declare fonts and colors
+@include font-face("woodcut", "woodcut", 400, normal);
+@include font-face("rodeo", "rodeo", 400, normal);
+
+// handy mixins
+@mixin transition($transition-property, $transition-time, $method) {
+  -webkit-transition: $transition-property $transition-time $method;
+  -moz-transition: $transition-property $transition-time $method;
+  -ms-transition: $transition-property $transition-time $method;
+  -o-transition: $transition-property $transition-time $method;
+  transition: $transition-property $transition-time $method;
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color;
+    -moz-box-shadow:inset $top $left $blur $color;
+    box-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}
+
+@mixin center-block() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
  //defaults
- #content {
- 
- }
+h1 {
+  font-family: "rodeo";
+  font-size: 80px;
+}
+
+h2, h3, h4 {
+  font-family: "rodeo";
+}
+
 
 #content {
 	float: none; 
 	margin: 0 auto;
 	margin-top: 180px;
- 	@include desktop {
-		width: 1000px;
-	}
-	@include tablet {
-		width: 100%;
-	}
-	@include phone {
-		width: 100%;
-	}
+  @include scale;
 }
 
  //imports
 
  @import "nav";
+ @import "footer";
  @import "slider";
  @import "form";
+ @import "session";
