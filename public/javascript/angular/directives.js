@@ -27,55 +27,87 @@ app.directive('ngFilters', []).filter('capitalize', function () {
 
 // draggable image 
 app.directive('ngImageDrag', ["$document", function($document) {
-    return function(scope, element, attr) {
-        var startX = 0, startY = 0, x = 0, y = 0;
+    return function(scope, element) {
+        // this gives us the native JS object
+        var el = element[0];
 
-        element.css({
-            position: 'relative',
-            cursor: 'pointer'
-        });
+        el.draggable = true;
 
-        element.on('mousedown', function(event) {
-          // Prevent default dragging of selected content
-          event.preventDefault();
-          startX = event.pageX - x;
-          startY = event.pageY - y;
-          $document.on('mousemove', mousemove);
-          $document.on('mouseup', mouseup);
-        });
+        el.addEventListener(
+            'dragstart',
+            function(e) {
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('Text', this.id);
+                this.classList.add('drag');
+                return false;
+            },
+            false
+        );
 
-        function mousemove(event) {
-          y = event.pageY - startY;
-          x = event.pageX - startX;
-          element.css({
-            top: y + 'px',
-            left:  x + 'px'
-          });
-        }
-
-        function mouseup() {
-          $document.off('mousemove', mousemove);
-          $document.off('mouseup', mouseup);
-        }
+        el.addEventListener(
+            'dragend',
+            function(e) {
+                this.classList.remove('drag');
+                return false;
+            },
+            false
+        );
     }
 }]);
 
-
-app.directive("ngDropBox", function($document) {
+app.directive('ngDropBox', function() {
   return {
-    restrict: "A",
     scope: {
-      onDrop: '&'
+      drop: '&' // parent
     },
+    link: function(scope, element) {
+      var el = element[0] 
+    
+      el.addEventListener(
+        'dragover',
+        function(e) {
+          e.dataTransfer.dropeffect = 'move';
+          if (e.preventDefault) e.preventDefault();
+          this.classList.add('over');
+          return false;
+        },
+      false
+      )
 
-    link: function(scope, el, attrs) {
-      console.log(angular.element(el).getBoundingClientRect());
-      var id = angular.element(el).attr("id");
-      console.log(id);
-    }
+      el.addEventListener(
+        'dragenter',
+        function(e) {
+          this.classList.add('over');
+          return false;
+        },
+        false
+      )
+
+      el.addEventListener(
+        'dragleave',
+        function(e) {
+          this.classList.remove('over');
+          return false;
+        },
+        false
+      )
+
+      el.addEventListener(
+        'drop',
+        function(e) {
+          // Stops some browsers from redirecting.
+          if (e.stopPropagation) e.stopPropagation();
+          this.classList.remove('over');
+
+          var item = document.getElementById(e.dataTransfer.getData('Text'));
+          this.appendChild(item);
+
+          return false;
+        },
+        false
+      );
+    } 
   }
-
 });
-
 
 

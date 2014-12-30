@@ -5,6 +5,10 @@ app.controller("formCtrl", function($scope, apiHandler, dataFactory) {
 											{image: "images/beard-1.png", name: "partial beard"}, 
 											{image: "images/beard-1.png", name: "goatie"}];
 
+	$scope.handleDrop = function() {
+		console.log('box dropped');	
+	}
+
 	$scope.form = {};
 	
 	$scope.submitForm = function(form) {

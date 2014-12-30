@@ -90,7 +90,16 @@ $phone-width: 480px;
   margin-right: auto;
 }
 
+@mixin skew($angle) {
+  -webkit-transform: skewY($angle);
+  -moz-transform: skewY($angle);
+  -ms-transform: skewY($angle);
+  -o-transform: skewY($angle);
+  transform: skewY($angle);
+}
+
  //defaults
+
 h1 {
   font-family: "rodeo";
   font-size: 80px;
@@ -112,6 +121,7 @@ h2, h3, h4 {
 
  @import "nav";
  @import "footer";
+ @import "barber-preloader";
  @import "slider";
  @import "form";
  @import "session";

@@ -51,6 +51,7 @@ app.controller("sliderCtrl", function($scope, apiHandler, dataFactory) {
       console.log(obj);
       $scope.comment = {};
       $scope.comment_form.$setPristine();
+      obj.created = "Just Now";
       $scope.beards[$scope.currentIndex].comments.push(obj);  
     });
   }

@@ -18,11 +18,11 @@
 		</div>
 
 		<div class="beard-type-container">
-			<div class="drop-box" ng-drop-box><div></div></div>
+			<div class="drop-box" ng-drop-box drop="handleDrop()"><div></div></div>
 			<div ng-repeat="option in beardtypes">
-				<span>
+				<span ng-image-drag>
 					<h2>{{ option.name }}</h2>
-					<img ng-image-drag ng-src="{{option.image}}"/>
+					<img ng-src="{{option.image}}"/>
 				</span>
 			</div>
 		</div>

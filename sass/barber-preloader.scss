@@ -1,0 +1,22 @@
+#barber-preloader {
+	width: 150px;
+	height: 400px;
+	border: 1px solid black;
+	overflow: hidden;
+	@include center-block;
+	div {
+		height: 25%;
+		width: 100%;
+		@include skew(-25deg);
+	} 
+	div:nth-child(even) {
+		background-color: white;
+	}
+	div:nth-child(odd) {
+		background-color: red;
+	}
+	div.move-down {
+		bottom: -125%;
+		@include transition(bottom, 2000);
+	}
+}
