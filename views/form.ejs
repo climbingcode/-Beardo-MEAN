@@ -18,15 +18,21 @@
 		</div>
 
 		<div class="beard-type-container">
-			<div class="drop-box" ng-drop-box drop="handleDrop()"><div></div></div>
-			<div ng-repeat="option in beardtypes">
-				<span ng-image-drag>
+			<div class="drop-box" ui-on-Drop="onDrop($event,$data)"></div>
+			<div ng-repeat="option in beardtypes" ui-draggable="true" drag="beardtypes"
+						on-drop-success="dropSuccessHandler($event,$index)">
+				<div>
 					<h2>{{ option.name }}</h2>
 					<img ng-src="{{option.image}}"/>
-				</span>
+				</div>
 			</div>
 		</div>
 
 		<button class="btn btn-default" type="submit">Submit</button>
 	</form>
+
+	<form ng-submit="deleteAccount(user)">
+		<button class="btn btn-default delete-account">Delete Account</button>
+	</form>
+	
 </section>

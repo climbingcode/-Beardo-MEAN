@@ -5,10 +5,15 @@
 	}
 	.slide {
 		@include scale(500px, 50%, 100%);
+		@include opacity(0);
+		@include transition(opacity, 2s, ease-in)
 		img {
-			@include center-block;	
+			@include center-block;
 		}	
 	}	
+	.slide.active {
+		opacity: 1;
+	}
 	.voting {
 		div {
 			position: absolute;

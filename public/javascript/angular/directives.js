@@ -24,6 +24,15 @@ app.directive('ngFilters', []).filter('capitalize', function () {
     };
 });
 
+app.directive('ngFadeIn', function() {
+  "use strict";
+  return function(scope, el, attr) {
+    scope.$watch(attr.ngShow, function toggleFade() { 
+      angular.element(el).addClass('active');
+    });
+  }
+});
+
 
 // draggable image 
 app.directive('ngImageDrag', ["$document", function($document) {

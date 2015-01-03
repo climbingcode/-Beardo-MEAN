@@ -52,6 +52,20 @@ app.service('apiHandler', function($http, $upload) {
 				console.log("failed : ", status)
 				callback("not found")
 			});
+		},
+
+		delete: function(route, data, callback) {
+			$http.post(
+				"api" + route,
+				JSON.stringify(data)
+		).success(function(data, status) {
+				console.log("success : ", data, status)
+				callback(data);
+			}).
+			error(function(status) {
+				console.log("failed : ", status)
+				callback("not found")
+			});
 		}
 	}
 });	

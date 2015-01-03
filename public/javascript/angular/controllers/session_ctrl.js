@@ -4,10 +4,10 @@ app.controller("sessionCtrl", function($scope, $http, $timeout, $routeParams, ap
 
 	$scope.signIn = function() {
 		user = apiHandler.show("signin", $scope.signInForm, function(data) {
-			console.log(data);
 			if (data.type === "found") {
 				$scope.inSession = true;	
-				$scope.user = data.user;
+				$scope.user = data.data;
+				console.log($scope.inSession, $scope.user);
 				$scope.logInError = false;
 			} else {
 				$scope.inSession = false;

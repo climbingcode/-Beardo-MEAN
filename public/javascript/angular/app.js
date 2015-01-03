@@ -1,1 +1,1 @@
-var app = angular.module("app", ['angularFileUpload', 'ngAnimate', 'ngRoute']);
+var app = angular.module("app", ['angularFileUpload', 'ngAnimate', 'ngRoute', "ngDragDrop"]);

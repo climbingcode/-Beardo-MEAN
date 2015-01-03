@@ -1,11 +1,9 @@
-<div id="barber-preloader">
-	<div></div>
-	<div></div>
-	<div></div>
-	<div></div>
-</div>
-
 <section class="slider-container" ng-controller="sliderCtrl">
+
+	<div ng-show="!slidesLoaded">
+		<%- include preloader %>
+	</div>
+
 	<div ng-repeat="beard in beards">
 		<div class="loading section" ng-show="!slidesLoaded">
 			<img class="loading-image" ng-src="images/loading.gif">
@@ -15,7 +13,7 @@
 		<div 	class="viewport" ng-show="isCurrentSlideIndex($index)" >	
 			<h2 class="votes" ng-if="beard.average">Ranking : {{ beard.average }}%</h2>
 			<h2 ng-if="beard.beardname" ng-show="isCurrentSlideIndex($index)" >{{beard.beardname | capitalize:true}}</h2>
-			<img 	class="slide" ng-src="{{beard.picture}}">
+			<img 	class="slide" ng-fade-in ng-src="{{beard.picture}}">
 		</div>
 
 		<a class="voting" ng-click="downVote()">
@@ -23,12 +21,6 @@
 		</a>
   	<a class="voting" ng-click="upVote()">
 	   	<div class="vote-up"></div>
-	  </a>
-	  <a class="arrows" ng-click="nextSlide()">
-	  	<div class="next-slide"></div>
-	  </a>
-	  <a class="arrows" ng-click="prevSlide()">
-	  	<div class="prev-slide"></div>
 	  </a>
 		<nav id="slider nav">
 			<div class="dots-wrapper">
@@ -39,7 +31,6 @@
 			</div>
 		</nav>		
 	</div>
-	<h2 ng-show="isCurrentSlideIndex($index)">{{ beard.index }}</h2>
 		<div class="comment-wrapper" ng-show="isCurrentSlideIndex($index)">
 			<div 	class="comment" 
 						ng-repeat="comment in beard.comments">
@@ -53,5 +44,6 @@
 		<input type="text" ng-model="comment.comment"></input>
 		<button name="submit">Submit</button>
 	</form>
+	<button ng-hide="inSession">Sign Up to Comment</button>
 </section>
 

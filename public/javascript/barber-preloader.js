@@ -1,7 +1,24 @@
-$(document).on('ready', function() {
- 	block = $('#barber-preloader div');
- 	block.addClass("move-down");
- 	red = block.first().clone();
- 	white = block.last().clone();	
- 	$('#barber-preloader').append(red);
+$(document).ready(function() {
+
+	var block = $('#barber-preloader div');
+	var value = function(i) { return ( i & 1 ) ? "odd" : "even"; }
+	var color = "red";
+
+	function addDiv() {
+		for (var i = 0; i < 20; i++) {
+			$('#barber-preloader').append("<div></div>");	
+		}
+		$('#barber-preloader div').animate({
+ 			'top': "-=150%"
+ 		}, 8000, 'linear');
+	}
+
+	addDiv();
+
+ 	setInterval(function() {
+ 		for (var i = 0; i < 20; i++) {
+ 			$('#barber-preloader div').first().remove();
+ 		}
+		addDiv()
+	}, 7400);
 });

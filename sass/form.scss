@@ -1,16 +1,15 @@
 .form-wrapper {
 	@include scale;
 	.beard-name {
+		text-align: center; 
+		@include center-block;
 		width: 50%;
-		float: left;
 	}	
 	.fileinput-container {
 		width: 50%;
-		float: left;
 	}
 	.beard-type-container {
 		.drop-box {
-			float: right;
 			width: 49%;
 			height: 200px;
 			background: grey;

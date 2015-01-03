@@ -9,4 +9,8 @@ var UserSchema = new Schema({
 	beard: {type: Schema.ObjectId, ref: "BeardSchema"}
 });
 
+UserSchema.methods.validPassword = function( pwd ) {
+    return ( this.password === pwd );
+};
+
 module.exports = mongoose.model('User', UserSchema);

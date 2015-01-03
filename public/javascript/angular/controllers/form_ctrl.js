@@ -5,8 +5,8 @@ app.controller("formCtrl", function($scope, apiHandler, dataFactory) {
 											{image: "images/beard-1.png", name: "partial beard"}, 
 											{image: "images/beard-1.png", name: "goatie"}];
 
-	$scope.handleDrop = function() {
-		console.log('box dropped');	
+	$scope.onDrop = function($event, $data) {
+		console.log($event, $data);	
 	}
 
 	$scope.form = {};
@@ -21,5 +21,12 @@ app.controller("formCtrl", function($scope, apiHandler, dataFactory) {
 			$scope.clickBeard();
 		});	
 	};
+
+	$scope.deleteAccount = function(user) {
+		apiHandler.delete("/beards/delete", user, function() {
+			$scope.inSession = false;
+		});
+		
+	}
 
 });

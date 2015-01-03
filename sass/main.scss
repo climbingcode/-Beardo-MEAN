@@ -72,6 +72,12 @@ $phone-width: 480px;
   transition: $transition-property $transition-time $method;
 }
 
+@mixin opacity($fade) {
+  -webkit-opacity: $fade;
+  -moz-opacity: $fade;
+  opacity: $fade;
+}
+
 @mixin box-shadow($top, $left, $blur, $color, $inset: false) {
   @if $inset {
     -webkit-box-shadow:inset $top $left $blur $color;
@@ -118,7 +124,6 @@ h2, h3, h4 {
 }
 
  //imports
-
  @import "nav";
  @import "footer";
  @import "barber-preloader";

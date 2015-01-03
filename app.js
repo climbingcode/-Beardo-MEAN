@@ -10,6 +10,8 @@ var expressLayouts = require('express-ejs-layouts');
 var mongoose  = require('mongoose');
 var multer = require('multer');
 var favicon = require('serve-favicon');
+var passport = require('passport');
+var session = require('session');
 
 
 //require helpers
@@ -49,11 +51,37 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));;
 app.use(bodyParser.json());
 app.use(expressLayouts);
+app.use(passport.initialize());
+
+
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true
+// }));
 
 //define db
 console.log(config.modulus);
 mongoose.connect(config.modulus); 
 console.log(mongoose.connection.readyState);
+
+//authentication
+LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
 
 //define routes	
 var router = express.Router();
@@ -64,7 +92,6 @@ app.use('/api', rating);
 app.use('/api', message);
 app.use('/api', session);
 // app.use('/api', admin);
-
 
 //define errors
 /// catch 404 and forwarding to error handler

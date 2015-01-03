@@ -1,12 +1,16 @@
 app.controller("sliderCtrl", function($scope, apiHandler, dataFactory) {
 
 	//call function to get beards
-	$scope.getData("beards", function(data){
-    dataFactory.averageVote(data, function(data) {
-      $scope.beards = data;
-      $scope.slidesLoaded = true;  
-    });
-	});	
+  $scope.getBeards = function() {
+	 $scope.getData("beards", function(data){
+      dataFactory.averageVote(data, function(data) {
+        $scope.beards = data;
+        $scope.slidesLoaded = true;  
+      });
+  	});	
+  };
+
+  $scope.getBeards();
 
 	//slider 
 	$scope.currentIndex = 0;
@@ -26,7 +30,7 @@ app.controller("sliderCtrl", function($scope, apiHandler, dataFactory) {
   };
 
   $scope.nextSlide = function () {
-    $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.beards.length - 1;  
+    $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.beards.length - 1; 
   };
 
   $scope.downVote = function () {
@@ -35,6 +39,7 @@ app.controller("sliderCtrl", function($scope, apiHandler, dataFactory) {
       ratings = $scope.beards[$scope.currentIndex].ratings;
     });
     $scope.prevSlide();
+    $scope.reloadSlides();
   }
 
   $scope.upVote = function() {
@@ -43,6 +48,16 @@ app.controller("sliderCtrl", function($scope, apiHandler, dataFactory) {
       ratings = $scope.beards[$scope.currentIndex].ratings;
     });
     $scope.prevSlide();
+    $scope.reloadSlides();
+  }
+
+  $scope.reloadSlides = function() {
+    console.log($scope.currentIndex);
+    if ($scope.currentIndex === 0) {
+      $scope.beards = [];
+      $scope.slidesLoaded = false;
+      $scope.getBeards();
+    }
   }
 
   $scope.submitComment = function() {

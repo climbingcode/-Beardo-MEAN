@@ -45,4 +45,8 @@ router.route('/beards').post([ multer({ dest: './uploads/'}), function(req, res)
     });
 }]);
 
+router.route("/beards/delete").post(function (req, res) {
+  console.log("in controller", req.body.user);
+});
+
 module.exports = router;
