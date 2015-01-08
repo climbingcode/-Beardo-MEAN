@@ -1,17 +1,5 @@
 app.controller("sliderCtrl", function($scope, apiHandler, dataFactory) {
 
-	//call function to get beards
-  $scope.getBeards = function() {
-	 $scope.getData("beards", function(data){
-      dataFactory.averageVote(data, function(data) {
-        $scope.beards = data;
-        $scope.slidesLoaded = true;  
-      });
-  	});	
-  };
-
-  $scope.getBeards();
-
 	//slider 
 	$scope.currentIndex = 0;
 

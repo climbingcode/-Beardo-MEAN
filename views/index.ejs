@@ -6,16 +6,19 @@
 	<div ng-show="showForm" ng-controller="sessionCtrl">
 
 		<h2 class="welcome" ng-show="inSession">Hey, {{user.username}}</h2>
-		<button class="login" ng-show="inSession" ng-click="logOut()">Logout</button>
+		<button class="btn logout" ng-show="inSession" ng-click="logOut()">Logout</button>
 
-		<div ng-show="!inSession">
+		<div ng-hide="inSession">
 			<%- include sessions %>
 		</div>
 		
-		<div ng-show="inSession">
-			<%- include form %>
+		<div ng-show="inSession" ng-controller="formCtrl">
+		 	<div ng-hide="userBeard">
+				<%- include form %>
+			</div>
+			<div ng-show="userBeard">
+				<%- include edit %>
+			</div>
 		</div>
-
 	</div>
-
 </div>

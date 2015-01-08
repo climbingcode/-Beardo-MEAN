@@ -1,1 +1,11 @@
 <h2>Editing Mode</h2>
+
+<img ng-src="{{userBeard.picture}}">
+
+<form ng-submit="delete('user', user)">
+	<button class="btn btn-default delete-account">{{user.username | capitalize:true}}'s Account</button>
+</form>
+
+<form ng-submit="delete('beards', userBeard)">
+	<button class="btn btn-default delete-beard">Delete {{userBeard.beardname | capitalize:true }}</button>
+</form>

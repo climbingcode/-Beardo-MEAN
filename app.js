@@ -10,25 +10,10 @@ var expressLayouts = require('express-ejs-layouts');
 var mongoose  = require('mongoose');
 var multer = require('multer');
 var favicon = require('serve-favicon');
+var session = require('express-session');
 var passport = require('passport');
-var session = require('session');
+var passportLocal = require('passport-local');
 
-
-//require helpers
-var beardHelper = require("./helpers/beards_helper.js");
-
-//require models
-var Beard = require('./models/beard');
-var Rating = require('./models/rating');
-var Comment = require('./models/comment');
-var User = require('./models/user');
-
-//require controllers
-var session = require('./controllers/session_controller');
-var site = require('./controllers/site_controller');
-var beards = require('./controllers/beard_controller');
-var rating = require('./controllers/rating_controller');
-var message = require('./controllers/comment_controller');
 
 //set app
 var app = express();
@@ -38,11 +23,6 @@ var Config = require('./environment.js');
 config = new Config();
 app.use(logger(config.env));
 
-//config views
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
-app.set('layout', 'layout')
-
 // config middleware
 app.use(express.static(path.join(__dirname, "bower_components")));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -51,46 +31,52 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));;
 app.use(bodyParser.json());
 app.use(expressLayouts);
+app.use(session({
+  secret: config.secret,
+  resave: false,
+  saveUninitialized: false 
+}));
+
 app.use(passport.initialize());
+app.use(passport.session({session: true}));
 
+//require models
+var Beard = require('./models/beard');
+var Rating = require('./models/rating');
+var Comment = require('./models/comment');
+var User = require('./models/user');
 
-// app.use(session({
-//   secret: 'keyboard cat',
-//   resave: false,
-//   saveUninitialized: true
-// }));
+//require config 
+var passwordEncryption = require("./config/encryption.js");
+var authenication = require("./config/authenication.js");
+
+//require controllers
+var users = require('./controllers/user_controller');
+var session = require('./controllers/session_controller');
+var site = require('./controllers/site_controller');
+var beards = require('./controllers/beard_controller');
+var rating = require('./controllers/rating_controller');
+var message = require('./controllers/comment_controller');
+
+//config views
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.set('layout', 'layout')
 
 //define db
 console.log(config.modulus);
 mongoose.connect(config.modulus); 
 console.log(mongoose.connection.readyState);
 
-//authentication
-LocalStrategy = require('passport-local').Strategy;
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
-
 //define routes	
 var router = express.Router();
 app.get('/', site.index);
-app.use(multer({ dest: './public/uploads'}));
+app.use(multer({ dest: config.uploads}));
 app.use('/api', beards);
 app.use('/api', rating);
 app.use('/api', message);
 app.use('/api', session);
+app.use('/api', users);
 // app.use('/api', admin);
 
 //define errors

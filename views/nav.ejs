@@ -4,7 +4,8 @@
 			<h1>Beardo</h1>
 		</span>
 		<span ng-click="clickForm();" ng-class="{'active': showForm}">
-			<h1>My Beardo</h1>
+			<h1 ng-show="inSession">{{user.username}}'s Beardo</h1>
+			<h1 ng-hide="inSession">My Beardo</h1>
 		</span>
 	</div>
 </nav>

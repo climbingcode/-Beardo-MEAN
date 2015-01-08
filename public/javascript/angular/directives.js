@@ -20,7 +20,9 @@ app.directive('fileModel', ['$parse', function ($parse) {
 app.directive('ngFilters', []).filter('capitalize', function () {
     "use strict";
     return function (input) {
+      if (input) {
         return input.charAt(0).toUpperCase() + input.slice(1);
+      }
     };
 });
 

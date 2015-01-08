@@ -11,6 +11,20 @@ var BeardSchema = new Schema({
   comments: [ ]
 });
 
+BeardSchema.methods.topBeards = function(amount) {
+  console.log("here");
+}
+
+BeardSchema.methods.restrictComments = function(amount, callback)  {
+  this.comments(function(err, comments) {
+    if (err) {
+      return callback(err);
+    } else {
+      console.log(comments, "working");
+    }
+  });
+}
+
 BeardSchema.statics.random = function(callback) {
   this.count(function(err, count) {
     if (err) {

@@ -1,10 +1,9 @@
-app.controller("mainCtrl", function($scope, apiHandler, dataFactory) {
+app.controller("mainCtrl", function($scope, $cookies, apiHandler, dataFactory) {
 
 	//data
-	$scope.inSession = false;
-	$scope.user = null;
 	$scope.beards = [];
 	$scope.ratings = [];
+	$scope.userBeard = false;
 	$scope.slidesLoaded = false;
 
 	//states
@@ -13,22 +12,29 @@ app.controller("mainCtrl", function($scope, apiHandler, dataFactory) {
 
 	$scope.clickBeard = function() {
 		$scope.showBeards = true;
-		$scope.showForm = false; 
+		$scope.showForm = false;
 	} 
+
 	$scope.clickForm = function() {
 		$scope.showForm = true;
 		$scope.showBeards = false;
 	}
 
-	//reloads data when new beard is added
-	$scope.dataChanged = false;
+	$scope.getBeards = function() {
+	 apiHandler.index("/beards", function(data){
+	 		if (data.user) {
+	 			$scope.user = data.user;
+	 			$scope.userBeard = data.beard;
+	 			$scope.inSession = true;
+	 			console.log($scope.user.beard);       
+	 		}
+      dataFactory.averageVote(data.data, function(beards) {
+        $scope.beards = beards;
+        $scope.slidesLoaded = true;  
+      });
+  	});	
+  };
 
-	$scope.getData = function(route, callback) {
-		apiHandler.index(route).then(function(data){
-			newData = dataFactory.getIndexs(data.data);
-			console.log(newData);
-			callback(newData);
-    });
-	}
+  $scope.getBeards();
 
 });

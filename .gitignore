@@ -2,3 +2,5 @@ environment.js
 .DS_Store
 
 public/uploads/*
+bower_components/*
+node_modules/* 

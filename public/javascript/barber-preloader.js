@@ -1,8 +1,6 @@
 $(document).ready(function() {
 
 	var block = $('#barber-preloader div');
-	var value = function(i) { return ( i & 1 ) ? "odd" : "even"; }
-	var color = "red";
 
 	function addDiv() {
 		for (var i = 0; i < 20; i++) {

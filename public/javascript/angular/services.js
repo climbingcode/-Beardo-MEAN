@@ -1,9 +1,10 @@
 app.service('apiHandler', function($http, $upload) {
 	return {
-		index: function(route) {
+		index: function(route, callback) {
 			return $http.get("api/" + route).
 			success(function(data, status) {
-				console.log("success : ", status)
+				console.log("success : ", status, data);
+				callback(data);
 			}).
 			error(function(status) {
 				console.log("failed : ", status)
@@ -54,10 +55,25 @@ app.service('apiHandler', function($http, $upload) {
 			});
 		},
 
-		delete: function(route, data, callback) {
+		update: function(route, data, callback) {
 			$http.post(
-				"api" + route,
+				"api/" + route,
 				JSON.stringify(data)
+			).success(function(data, status) {
+				console.log("success : ", data, status)
+				callback(data);
+			}).
+			error(function(status) {
+				console.log("failed : ", status)
+				callback("not found")
+			});
+		},
+
+		destroy: function(route, data, callback) {
+			console.log(route);
+			$http.delete(
+				"api/" + route,
+				data
 		).success(function(data, status) {
 				console.log("success : ", data, status)
 				callback(data);

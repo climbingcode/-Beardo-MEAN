@@ -46,11 +46,15 @@
 
 #main-nav {
 	div {
+		@include desktop {
+			span.active:first-child {
+				background-image: url("../images/beard-sil.png");
+			}
+		}
 		span.active {
 			@include transition(background-image, 0.5s, ease-in-out);
 			background-color: #000;
 			@include desktop {
-				background-image: url("../images/beard-sil.png");
 				background-repeat: no-repeat;
 				background-position: 5% 5%; 
 				background-size: 140px 140px;

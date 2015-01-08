@@ -1,4 +1,4 @@
-<section class="form-wrapper" ng-controller="formCtrl">
+<section class="form-wrapper">
 	
 	<form class="form-group" ng-submit="submitForm(form)">	
 		<input 	class="form-control beard-name" type="input" ng-model="form.beardname" placeholder="add a cool name!">
@@ -29,10 +29,6 @@
 		</div>
 
 		<button class="btn btn-default" type="submit">Submit</button>
-	</form>
-
-	<form ng-submit="deleteAccount(user)">
-		<button class="btn btn-default delete-account">Delete Account</button>
 	</form>
 	
 </section>

@@ -1,16 +1,17 @@
 var express = require('express')
   , mongoose = require('mongoose')
-  , router = express.Router();
+  , router = express.Router()
+  , passport = require("passport");
 
 var Rating = mongoose.model('Rating');
 var Beard = mongoose.model('Beard');
 var Comment = mongoose.model('Comment');
 
 
-router.route('/comments')
-	.post(function(req, res) {
+router.post('/comments', passport.authenticate("local"), function(req, res) {
 
 		var comment = new Comment();
+		comment.userId = req.user._id;
 		comment.comment = req.body.comment;
 		
 		Beard.findById(req.body.beard, function(err, beard) {

@@ -7,11 +7,11 @@
 
 //media
 
-/* Medium Devices, Desktops */
+//Medium Devices, Desktops
 $desktop-width: 992px;
-/* Small Devices, Tablets */
+//Small Devices, Tablets 
 $tablet-width: 768px;
-/* Extra Small Devices, Phones */ 
+//Extra Small Devices, Phones 
 $phone-width: 480px;
 
 
@@ -34,7 +34,6 @@ $phone-width: 480px;
 @mixin scale($desktop-width: 1000px, $tablet-width: 100%, $phone-width: 100%) {
   @include center-block;
   @include desktop { 
-   
     width: $desktop-width;  
   }
   @include tablet { 

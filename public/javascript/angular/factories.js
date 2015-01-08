@@ -1,7 +1,3 @@
-
-
-
-
 app.factory('dataFactory', function() {
 
 	var factory = {};
@@ -24,6 +20,7 @@ app.factory('dataFactory', function() {
 	}
 
   factory.averageVote = function(beards, callback) {
+    console.log(beards);
   	for (var b = 0; b < beards.length; b++) {
   		beard = beards[b];
   		ratings = beard.ratings;

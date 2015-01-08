@@ -22,11 +22,16 @@ app.controller("formCtrl", function($scope, apiHandler, dataFactory) {
 		});	
 	};
 
-	$scope.deleteAccount = function(user) {
-		apiHandler.delete("/beards/delete", user, function() {
-			$scope.inSession = false;
-		});
-		
+	$scope.delete = function(url, value) {
+		apiHandler.destroy(url, value, function(data) {
+			if (data.value = "user deleted") {
+				$scope.inSession = false;
+				console.log("deleted user", data.user);
+			} else if (data.value = "beard deleted") {
+				$scope.userBeard = false;
+				console.log("deleted beard", data.beard);
+			}
+		});		
 	}
 
 });

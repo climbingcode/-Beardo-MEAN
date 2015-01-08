@@ -1,13 +1,13 @@
-app.controller("sessionCtrl", function($scope, $http, $timeout, $routeParams, apiHandler) {
+app.controller("sessionCtrl", function($scope, $http, $timeout, $cookies, $routeParams, apiHandler) {
 	
 	$scope.logInError = false;
-
+	
 	$scope.signIn = function() {
-		user = apiHandler.show("signin", $scope.signInForm, function(data) {
-			if (data.type === "found") {
+		user = apiHandler.show("session", $scope.signInForm, function(user) {
+			if (user.data) {
 				$scope.inSession = true;	
-				$scope.user = data.data;
-				console.log($scope.inSession, $scope.user);
+				$scope.user = user.data;
+				$scope.userBeard = user.beard;
 				$scope.logInError = false;
 			} else {
 				$scope.inSession = false;
@@ -19,21 +19,24 @@ app.controller("sessionCtrl", function($scope, $http, $timeout, $routeParams, ap
 		});	
 	}
 
-	$scope.signUp =  function() {
-		user = apiHandler.create("signup", $scope.signUpForm, function(data) {
+	$scope.signUp = function() {
+		user = apiHandler.create("user", $scope.signUpForm, function(data) {
 			console.log(data);
 			if (data) {
 				$scope.inSession = true;	
 				$scope.user = data;
 				$scope.loginError = false;
 			} else {
-				$scope.inSession = null;
+				$scope.inSession = false;
 			}
 		});
 	}
 
 	$scope.logOut = function() {
-		$scope.inSession = null;
+		apiHandler.destroy("session", $scope.user, function(data) {
+			console.log("user has been logged out!");
+		});
+		$scope.inSession = false;
 		$scope.user = null;
 	}
 
