@@ -14,7 +14,6 @@ var options = { skip: 0, limit: 10, count: 5 };
 
 router.get('/beards', function(req, res) {
   Beard.find().exec(function(err, data) {
-    console.log(req.user);
     if (err) {
       res.send(err);
     } else if (req.user) {
@@ -87,12 +86,13 @@ router.route('/beards').post([multer({ dest: config.uploads}), function(req, res
   });
 }]);
 
-router.delete("/beards", passport.authenticate("local"), function (req, res) {
+router.delete("/beards",  function (req, res) {
   Beard.findOne({_id: req.user.beard}, function(err, beard) {
     if (err) {
       res.json({ data: err })
     } else if (beard) {
-      console.log(beard);
+      beard.remove();
+      res.json({ type: "beard removed"})
     } else {
       res.json({ type: "user not found" })
     } 

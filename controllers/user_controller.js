@@ -1,16 +1,18 @@
 var express = require('express')
   , mongoose = require('mongoose')
+  , bodyParser = require('body-parser')
+  , path = require('path')
   , router = express.Router()
-  , passport = require("passport")
   , passwordEncryption = require("../config/encryption.js")
+  , passport = require('passport');
 
 var Rating = mongoose.model('Rating');
 var Beard = mongoose.model('Beard');
 var Comment = mongoose.model('Comment');
+var User = mongoose.model('User');
 
 router.post('/user', function(req, res) {
 	passwordEncryption.cryptPassword(req.body.password, function(err, password) {
-		console.log("here");
 	 	var user = new User();
 	 	user.username = req.body.username;
 	 	user.email = req.body.email;
@@ -19,21 +21,22 @@ router.post('/user', function(req, res) {
 	 		if (err) {
 	 			res.send(err);
 	 		} else {
-	 			req.login(user, function(err) {
-    			if (err) return res.status(500).send('error');
-    			return done(null,user, function() {
+	 			req.login(user, function(err, user) {
+    			if (err) {
+    				res.status(500).send('error');
+    			} else {
     				res.json({
 	 						type: "success",
-	 						data: user
+	 						data: req.user
 	 					});
-    			}); 
+    			}   			
   			});
 	 		}
 	 	});
 	});
 });
 
-router.delete("/user", passport.authenticate("local"), function (req, res) {
+router.delete("/user", function (req, res) {
   console.log("here");
 });
 

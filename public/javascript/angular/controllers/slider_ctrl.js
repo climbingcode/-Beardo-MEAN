@@ -48,6 +48,10 @@ app.controller("sliderCtrl", function($scope, apiHandler, dataFactory) {
     }
   }
 
+  $scope.$watch($scope.inSession, function() {
+    console.log($scope.inSession);
+  }, true);
+
   $scope.submitComment = function() {
     $scope.comment.beard = $scope.beards[$scope.currentIndex]._id
     apiHandler.create("comments", $scope.comment, function(obj){

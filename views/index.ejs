@@ -3,7 +3,7 @@
 		<%- include slider %>
 	</div>
 	
-	<div ng-show="showForm" ng-controller="sessionCtrl">
+	<div ng-show="showForm">
 
 		<h2 class="welcome" ng-show="inSession">Hey, {{user.username}}</h2>
 		<button class="btn logout" ng-show="inSession" ng-click="logOut()">Logout</button>
@@ -13,10 +13,10 @@
 		</div>
 		
 		<div ng-show="inSession" ng-controller="formCtrl">
-		 	<div ng-hide="userBeard">
+		 	<div ng-hide="hasBeard">
 				<%- include form %>
 			</div>
-			<div ng-show="userBeard">
+			<div ng-show="angular.isObjectuser(hasBeard)">
 				<%- include edit %>
 			</div>
 		</div>

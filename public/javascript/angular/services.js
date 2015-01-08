@@ -11,7 +11,7 @@ app.service('apiHandler', function($http, $upload) {
 			});
 		},
 
-		upload: function(data, file) {
+		upload: function(data, file, callback) {
 			$upload.upload({
 				url: 'api/beards', 
         method: 'POST',
@@ -22,22 +22,24 @@ app.service('apiHandler', function($http, $upload) {
         console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
       }).success(function(data, status, headers, config) {
         console.log("uploaded");
+        callback(data);
       }).error(function(status) {
       	console.log("error uploading");
+      	callback("error uploading");
       });
 		},
 
 		create: function(route, data, callback) {
-			obj = data;
 			$http.post(
 				'api/' + route,
 				JSON.stringify(data)	
 			).success(function(data){
 				console.log('submitted to api:', data);
+				callback(data);
 			}).error(function() {
 				console.log('api did not except');
-			});
-			callback(obj);
+				callback(null)
+			});	
 		},
 
 		show: function(route, data, callback) {
@@ -51,7 +53,7 @@ app.service('apiHandler', function($http, $upload) {
 			}).
 			error(function(status) {
 				console.log("failed : ", status)
-				callback("not found")
+				callback(null)
 			});
 		},
 

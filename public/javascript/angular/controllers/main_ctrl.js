@@ -3,8 +3,9 @@ app.controller("mainCtrl", function($scope, $cookies, apiHandler, dataFactory) {
 	//data
 	$scope.beards = [];
 	$scope.ratings = [];
-	$scope.userBeard = false;
 	$scope.slidesLoaded = false;
+	$scope.inSession = false;
+	$scope.hasBeard = false;
 
 	//states
 	$scope.showBeards = true; 
@@ -24,7 +25,7 @@ app.controller("mainCtrl", function($scope, $cookies, apiHandler, dataFactory) {
 	 apiHandler.index("/beards", function(data){
 	 		if (data.user) {
 	 			$scope.user = data.user;
-	 			$scope.userBeard = data.beard;
+	 			$scope.hasBeard = data.beard;
 	 			$scope.inSession = true;
 	 			console.log($scope.user.beard);       
 	 		}

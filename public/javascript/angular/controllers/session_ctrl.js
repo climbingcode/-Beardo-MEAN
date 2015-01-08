@@ -4,31 +4,14 @@ app.controller("sessionCtrl", function($scope, $http, $timeout, $cookies, $route
 	
 	$scope.signIn = function() {
 		user = apiHandler.show("session", $scope.signInForm, function(user) {
-			if (user.data) {
-				$scope.inSession = true;	
-				$scope.user = user.data;
-				$scope.userBeard = user.beard;
-				$scope.logInError = false;
-			} else {
-				$scope.inSession = false;
-				$scope.logInError = true;
-				$timeout(function() {
-					$scope.logInError = false;
-				}, 3000);
-			}
+			console.log(user);
+			dataSetter(user);
 		});	
 	}
 
 	$scope.signUp = function() {
-		user = apiHandler.create("user", $scope.signUpForm, function(data) {
-			console.log(data);
-			if (data) {
-				$scope.inSession = true;	
-				$scope.user = data;
-				$scope.loginError = false;
-			} else {
-				$scope.inSession = false;
-			}
+		user = apiHandler.create("user", $scope.signUpForm, function(user) {
+			dataSetter(user);
 		});
 	}
 
@@ -38,6 +21,21 @@ app.controller("sessionCtrl", function($scope, $http, $timeout, $cookies, $route
 		});
 		$scope.inSession = false;
 		$scope.user = null;
+	}
+
+	var dataSetter = function(user) {
+			if (user.data) {
+				$scope.inSession = true;	
+				$scope.user = user.data;
+				$scope.hasBeard = user.beard;
+				$scope.logInError = false;
+			} else {
+				$scope.inSession = false;
+				$scope.logInError = true;
+				$timeout(function() {
+					$scope.logInError = false;
+				}, 3000);
+			}
 	}
 
 });
