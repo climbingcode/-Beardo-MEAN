@@ -1,6 +1,5 @@
-app.controller("formCtrl", function($scope, apiHandler, dataFactory) {
+app.controller("formCtrl", ["$scope", "apiHandler", "dataFactory", function($scope, apiHandler, dataFactory) {
 	
-	$scope.hasBeard = false;
 	//form
 	$scope.beardtypes = [{image: "images/beard-1.png", name: "full beards"}, 
 											{image: "images/beard-1.png", name: "partial beard"}, 
@@ -11,10 +10,11 @@ app.controller("formCtrl", function($scope, apiHandler, dataFactory) {
 	$scope.submitForm = function(form) {
 		apiHandler.upload($scope.form, $scope.photo, function(data) {
 			$scope.slidesLoaded;
-			$scope.beards.push()
-			$scope.beards = data.data;
+			$scope.beards = data.beards;
 			$scope.slidesLoaded = true;
-			$scope.hasBeard = data.beard;
+			dataFactory.averageVote([data.beard], function(beard) {
+				$scope.beard = beard[0];
+			}); 
 			$scope.clickBeard();
 		});
 	};
@@ -22,13 +22,9 @@ app.controller("formCtrl", function($scope, apiHandler, dataFactory) {
 	$scope.delete = function(url, value) {
 		apiHandler.destroy(url, value, function(data) {
 			if (data.type = "user deleted") {
-				$scope.inSession = false;
-				console.log("deleted user", data.user);
-			} else if (data.type = "beard removed") {
-				$scope.hasBeard = false;
-				console.log("deleted beard", data.beard);
+				$scope.beard = false;
 			}
 		});		
 	}
 
-});
+}]);

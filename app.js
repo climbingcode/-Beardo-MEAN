@@ -49,6 +49,7 @@ var User = require('./models/user');
 //require config 
 var passwordEncryption = require("./config/encryption.js");
 var authenication = require("./config/authenication.js");
+var uploads = require('./config/uploads.js');
 
 //require controllers
 var users = require('./controllers/user_controller');

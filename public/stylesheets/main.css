@@ -170,6 +170,16 @@ h2, h3, h4 {
     text-shadow: 0 0 5px #000;
     text-align: center; }
 
+.slider-container .top-beards-wrapper {
+  overflow: scroll; }
+  .slider-container .top-beards-wrapper .top-beards-container {
+    display: inline-block;
+    width: 10%;
+    margin-right: 2.5%; }
+    .slider-container .top-beards-wrapper .top-beards-container img {
+      width: 100%; }
+    .slider-container .top-beards-wrapper .top-beards-container h3 {
+      text-align: center; }
 .slider-container h2 {
   font-size: 60px;
   text-align: center; }
@@ -276,6 +286,10 @@ h2, h3, h4 {
 
 .error.active {
   display: block; }
+
+#edit-wrapper img {
+  width: 400px;
+  height: auto; }
 
 #session-wrapper {
   display: block;

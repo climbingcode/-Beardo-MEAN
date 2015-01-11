@@ -8,7 +8,7 @@ var Beard = mongoose.model('Beard');
 var Comment = mongoose.model('Comment');
 
 
-router.post('/comments', passport.authenticate("local"), function(req, res) {
+router.post('/comments', function(req, res) {
 
 		var comment = new Comment();
 		comment.userId = req.user._id;
@@ -21,12 +21,15 @@ router.post('/comments', passport.authenticate("local"), function(req, res) {
 					console.log(comment, "failed");
 					res.send(err);
 					res.json({status: "failed"});   
-				} else {
-					console.log(beard, "saved");
+				} else if (req.user) {
+					console.log(beard.comments, "saved");
 					res.json({ 
           	type: "success",
           	saved: comment
         	});
+				} else {
+					console.log("not authenitcated");
+					res.send(null);
 				}
 			});
 		});

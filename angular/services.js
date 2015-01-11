@@ -1,4 +1,4 @@
-app.service('apiHandler', function($http, $upload) {
+app.service('apiHandler', ["$http", "$upload", function($http, $upload) {
 	return {
 		index: function(route, callback) {
 			return $http.get("api/" + route).
@@ -86,7 +86,7 @@ app.service('apiHandler', function($http, $upload) {
 			});
 		}
 	}
-});	
+}]);	
 
 
 

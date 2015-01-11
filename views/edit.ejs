@@ -1,11 +1,16 @@
-<h2>Editing Mode</h2>
+<section id="edit-wrapper"> 
 
-<img ng-src="{{userBeard.picture}}">
+	<h2>Editing Mode</h2>
 
-<form ng-submit="delete('user', user)">
-	<button class="btn btn-default delete-account">{{user.username | capitalize:true}}'s Account</button>
-</form>
+	<h2>{{ beard.average }}%</h2>
+	<img ng-src="{{ beard.picture | findpath }}">
 
-<form ng-submit="delete('beards', userBeard)">
-	<button class="btn btn-default delete-beard">Delete {{userBeard.beardname | capitalize:true }}</button>
-</form>
+	<form ng-submit="delete('user', user)">
+		<button class="btn btn-default delete-account">{{user.username | capitalize:true}}'s Account</button>
+	</form>
+
+	<form ng-submit="delete('beards', userBeard)">
+		<button class="btn btn-default delete-beard">Delete {{userBeard.beardname | capitalize:true }}</button>
+	</form>
+
+</section>

@@ -1,9 +1,15 @@
 <section class="slider-container" ng-controller="sliderCtrl">
 	
-	
-	
 	<div ng-show="!slidesLoaded">
 		<%- include preloader %>
+	</div>
+
+	<div class="top-beards-wrapper">
+		<span class="top-beards-container" ng-repeat="beard in topBeards">
+			<h3>{{ beard | index:topBeards }}</h3>
+			<img src="{{beard.picture | findpath}}"/>
+			<h3>{{ beard.average }}%</h3>
+		</span>
 	</div>
 
 	<div ng-repeat="beard in beards">
@@ -15,7 +21,7 @@
 		<div 	class="viewport" ng-show="isCurrentSlideIndex($index)" >	
 			<h2 class="votes" ng-if="beard.average">Ranking : {{ beard.average }}%</h2>
 			<h2 ng-if="beard.beardname" ng-show="isCurrentSlideIndex($index)" >{{beard.beardname | capitalize:true}}</h2>
-			<img 	class="slide" ng-src="{{beard.picture}}">
+			<img 	class="slide" ng-src="{{ beard.picture | findpath }}">
 		</div>
 
 		<a class="voting" ng-click="downVote()">

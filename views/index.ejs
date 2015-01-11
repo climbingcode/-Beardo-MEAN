@@ -13,10 +13,10 @@
 		</div>
 		
 		<div ng-show="inSession" ng-controller="formCtrl">
-		 	<div ng-hide="hasBeard">
+		 	<div ng-hide="beard.picture">
 				<%- include form %>
 			</div>
-			<div ng-show="angular.isObjectuser(hasBeard)">
+			<div ng-show="beard.picture">
 				<%- include edit %>
 			</div>
 		</div>

@@ -17,23 +17,21 @@ router.delete("/session", function(req, res) {
 	});
 });
 
-router.post('/session', passport.authenticate("local"), function(req, res) {
-	console.log(req.user)
-	Beard.findOne({_id: req.user.beard}, function(err, beard) {
-		if (err) {
-			res.json({
-				type: "beard not found",
-				data: req.user
-			});
-		} else {
-			res.json({
-				type: "found",
-				data: req.user,
-				beard: beard
-			});
-		}
-	});
+router.post("/session", passport.authenticate("local"), function(req, res) { 
+  Beard.findOne({_id: req.user.beard}, function(err, beard) {
+    if (err) {
+      res.json({
+        type: "beard not found",
+        data: req.user
+      });
+    } else {
+      res.json({
+        type: "found",
+        data: req.user,
+        beard: beard
+      });
+    }
+  });
 });
-
 
 module.exports = router;

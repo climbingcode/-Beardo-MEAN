@@ -1,4 +1,18 @@
 .slider-container {
+	.top-beards-wrapper {
+		overflow: scroll;
+		.top-beards-container {
+			display: inline-block;
+			width: 10%;
+			margin-right: 2.5%;
+			img {
+				width: 100%;
+			}
+			h3 {
+				text-align: center;
+			}
+		}
+	}
 	h2 {
 		font-size: 60px;
 		text-align: center;
